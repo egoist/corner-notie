@@ -1,5 +1,7 @@
 register('deploy', ['build', 'git', 'publish'])
 
+alias('dev', 'gulp')
+
 alias('build', [
   'gulp browser',
   'gulp webpack'

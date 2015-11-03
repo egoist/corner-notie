@@ -41,7 +41,7 @@ gulp.task('browser', (cb) => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch('./src/notie.js', ['webpack', 'browser'])
+  gulp.watch('./src/notie.js', ['browser'])
 })
 
 gulp.task('build', ['browser'])

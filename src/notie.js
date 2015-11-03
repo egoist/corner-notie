@@ -30,11 +30,7 @@ class Notie {
       } else {
         this.opts.type = opts[0]
         this.opts.text = opts[1]
-        if (opts.length === 2) {
-          this.opts.autoHide = true
-        } else {
-          this.opts.autoHide = (typeof opts[2] === 'undefined') ? true : opts[2]
-        }
+        this.opts.autoHide = (typeof opts[2] === 'undefined') ? true : opts[2]
       }
     }
     this.notify()

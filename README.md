@@ -30,6 +30,17 @@ notie({
 })
 ```
 
+## Development
+
+```bash
+npm install -g gulp runfile
+# build for webpack and browser
+# run this each time you want to make new release
+run build
+# run gulp for development
+run dev
+```
+
 ## License
 
 MIT.
