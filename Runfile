@@ -1,4 +1,9 @@
-register('deploy', ['git', 'publish'])
+register('deploy', ['build', 'git', 'publish'])
+
+alias('build', [
+  'gulp browser',
+  'gulp webpack'
+])
 
 register('git', () => {
   var message = argv._[1] || 'update'

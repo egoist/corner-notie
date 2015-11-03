@@ -1,6 +1,6 @@
 {
   "name": "notie",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A corner tip utility for Chelly",
   "main": "notie.js",
   "scripts": {
@@ -26,14 +26,13 @@
     "css-loader": "^0.21.0",
     "cssnext": "^1.8.4",
     "gulp": "^3.9.0",
-    "gulp-babel": "^6.0.0",
     "gulp-serve": "^1.2.0",
+    "gulp-util": "^3.0.7",
     "postcss-loader": "^0.7.0",
     "postcss-mixins": "^2.1.1",
     "postcss-nested": "^1.0.0",
     "style-loader": "^0.13.0",
     "svg-inline-loader": "^0.3.0",
-    "webpack": "^1.12.2",
-    "webpack-stream": "^2.1.1"
+    "webpack": "^1.12.2"
   }
 }

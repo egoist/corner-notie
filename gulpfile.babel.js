@@ -1,77 +1,49 @@
-import webpack from 'webpack'
 import gulp from 'gulp'
-import babel from 'gulp-babel'
-import webpackStream from 'webpack-stream'
 import serve from 'gulp-serve'
-
-const webpackConfig = {
-  watch: true,
-  output: {
-    filename: 'notie.js'
-  },
-  module: {
-    loaders: [
-      { test: /\.js$/, loader: 'babel' },
-      {
-        test: /\.css$/, loader: 'style!css!postcss'
-      },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline'
-      }
-    ],
-  },
-  postcss () {
-    return [
-      require('postcss-mixins'),
-      require('postcss-nested'),
-      require('cssnext')()
-    ]
-  },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
-  ]
-}
+import webpack from 'webpack'
+import gutil from 'gulp-util'
+import path from 'path'
+import webpackConfig from './webpack.config'
 
 gulp.task('serve', serve({
   port: 3746,
   root: '.'
 }))
 
-gulp.task('babel', () => {
-  gulp.src('./src/notie.js')
-    .pipe(babel())
-    .pipe(gulp.dest('./'))
+
+gulp.task('webpack', (cb) => {
+  let config = Object.create(webpackConfig)
+  config.output.libraryTarget = 'commonjs2'
+  config.output.library = true
+  config.output.path = path.resolve('./')
+  config.target = 'node'
+  let compiler = webpack(config)
+  compiler.run((err, stats) => {
+    if(err) throw new gutil.PluginError("webpack", err)
+    gutil.log("[webpack-webpack]", stats.toString({
+      colors: true
+    }))
+    cb()
+  })
 })
 
-gulp.task('browser', () => {
-  gulp.src('./src/browser.js')
-  .pipe(webpackStream(webpackConfig))
-  .pipe(gulp.dest('./browser'))
-})
 
-gulp.task('webpack', () => {
-  const config = Object.assign({}, webpackConfig)
-  config.output.libraryTarget = 'commonjs'
-  gulp.src('./src/notie.js')
-  .pipe(webpackStream(config))
-  .pipe(gulp.dest('./'))
+gulp.task('browser', (cb) => {
+  let config = Object.create(webpackConfig)
+  let compiler = webpack(config)
+  compiler.run((err, stats) => {
+    if(err) throw new gutil.PluginError("webpack", err)
+    gutil.log("[webpack-browser]", stats.toString({
+      colors: true
+    }))
+    cb()
+  })
 })
 
 gulp.task('watch', () => {
-  gulp.watch('./src/notie.js', ['babel'])
+  gulp.watch('./src/notie.js', ['webpack', 'browser'])
 })
 
-gulp.task('build', ['babel', 'webpack', 'browser'])
+gulp.task('build', ['browser'])
 
-gulp.task('default', ['build', 'watch', 'serve'])
+gulp.task('default', ['build', 'serve', 'watch'])

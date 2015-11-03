@@ -15,11 +15,27 @@ class Notie {
     this.opts = this.opts || {}
     if (typeof opts[0] === 'object') {
       this.opts = opts[0]
+      this.opts.type = this.opts.type ? this.opts.type : 'info'
+      if (!this.opts.text) {
+        return console.error('No text provided...')
+      }
       this.opts.autoHide = (typeof this.opts.autoHide === 'undefined') ? true : this.opts.autoHide
     } else {
-      this.opts.type = opts[0]
-      this.opts.text = opts[1]
-      this.opts.autoHide = (typeof opts[2] === 'undefined') ? true : opts[2]
+      if (!opts || opts.length === 0) {
+        return console.error('lack of arguments...')
+      } else if (opts.length === 1) {
+        this.opts.type = 'info'
+        this.opts.text = opts[0]
+        this.opts.autoHide = true
+      } else {
+        this.opts.type = opts[0]
+        this.opts.text = opts[1]
+        if (opts.length === 2) {
+          this.opts.autoHide = true
+        } else {
+          this.opts.autoHide = (typeof opts[2] === 'undefined') ? true : opts[2]
+        }
+      }
     }
     this.notify()
   }
@@ -71,6 +87,12 @@ class Notie {
   }
 }
 
-export default (...opts) => {
+const notie = (...opts) => {
   return new Notie(opts)
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = notie
+} else if (typeof window !== 'undefined') {
+  window.notie = notie
 }
