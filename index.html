@@ -43,6 +43,14 @@
       .main {
         margin-top: 40px;
       }
+      .link {
+        color: #698997;
+        text-decoration: none;
+        font-size: 24px;
+      }
+      .footer {
+        margin-top: 120px;
+      }
     </style>
   </head>
   <body>
@@ -56,6 +64,9 @@
       <button onclick="notie('error', 'hello world', true)">error</button>
       <button onclick="notie('warning', 'hello <a href=#>world</a>', false)">never fade</button>
       <button onclick="notie('info', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam quo consequatur, consequuntur exercitationem maxime qui voluptatibus error optio explicabo at ipsa porro <a href=#>veniam</a> dolores unde consectetur tempora nesciunt! Tenetur!', true)">huge text</button>
+      <footer class="footer">
+        <a href="https://github.com/egoist/notie" class="link">Star me on GitHub!</a>
+      </footer>
     </div>
 
     <script src="./browser/notie.js"></script>
