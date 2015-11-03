@@ -1,5 +1,9 @@
 # notie
 
+[![NPM version](https://img.shields.io/npm/v/notie.svg?style=flat-square)](https://www.npmjs.com/package/notie)
+[![NPM download](https://img.shields.io/npm/dm/notie.svg?style=flat-square)](https://www.npmjs.com/package/notie)
+[![David Status](https://img.shields.io/david/egoist/notie.svg?style=flat-square)](https://david-dm.org/egoist/notie)
+
 A corner tip utility for [Chelly](https://github.com/egoist/chelly).
 
 ## Install
