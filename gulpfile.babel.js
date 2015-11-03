@@ -61,8 +61,10 @@ gulp.task('browser', () => {
 })
 
 gulp.task('webpack', () => {
+  const config = Object.assign({}, webpackConfig)
+  config.output.libraryTarget = 'commonjs'
   gulp.src('./src/notie.js')
-  .pipe(webpackStream(webpackConfig))
+  .pipe(webpackStream(config))
   .pipe(gulp.dest('./'))
 })
 
