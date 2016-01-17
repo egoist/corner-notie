@@ -74,8 +74,7 @@ class Notie {
       })
     }
   }
-  removeNotie (notie) {
-    notie = notie || this.notie
+  removeNotie (notie = this.notie) {
     notie.classList.remove('notie-shown')
     setTimeout(() => {
       notie.remove()
