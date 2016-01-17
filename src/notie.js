@@ -11,8 +11,8 @@ const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
 class Notie {
-  constructor (opts) {
-    this.opts = this.opts || {}
+  constructor (opts = {}) {
+    this.opts = opts
     if (typeof opts[0] === 'object') {
       this.opts = opts[0]
       this.opts.type = this.opts.type ? this.opts.type : 'info'

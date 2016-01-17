@@ -1,9 +1,9 @@
 # notie
 
-[![NPM version](https://img.shields.io/npm/v/notie.svg?style=flat-square)](https://www.npmjs.com/package/notie)
-[![NPM download](https://img.shields.io/npm/dm/notie.svg?style=flat-square)](https://www.npmjs.com/package/notie)
+[![NPM version](https://img.shields.io/npm/v/corner-notie.svg?style=flat-square)](https://www.npmjs.com/package/corner-notie)
+[![NPM download](https://img.shields.io/npm/dm/corner-notie.svg?style=flat-square)](https://www.npmjs.com/package/corner-notie)
 
-A corner tip utility for [Chelly](https://github.com/egoist/chelly).
+A corner tip utility.
 
 ## Install
 
@@ -12,14 +12,14 @@ Hot-link the `./browser/notie.js` in your web page directly, CSS is automaticall
 or via NPM:
 
 ```bash
-npm i -S notie
+npm i -S corner-notie
 ```
 
 ## Usage
 
 ```javascript
 // if you are using webpack
-import notie from 'notie'
+import notie from 'corner-notie'
 // tell notie to show `hello world` info and auto-hide it.
 notie('info', 'hello world', true)
 // or use object as argument
@@ -33,12 +33,11 @@ notie({
 ## Development
 
 ```bash
-npm install -g gulp runfile
 # build for webpack and browser
 # run this each time you want to make new release
-run build
+npm run build
 # run gulp for development
-run dev
+npm run dev
 ```
 
 ## License

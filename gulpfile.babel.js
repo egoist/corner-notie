@@ -46,4 +46,6 @@ gulp.task('watch', () => {
 
 gulp.task('build', ['browser'])
 
+gulp.task('build:all', ['browser', 'webpack'])
+
 gulp.task('default', ['build', 'serve', 'watch'])

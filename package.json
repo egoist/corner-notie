@@ -1,14 +1,16 @@
 {
-  "name": "notie",
-  "version": "0.0.15",
-  "description": "A corner tip utility for Chelly",
+  "name": "corner-notie",
+  "version": "0.0.2",
+  "description": "A corner tip utility",
   "main": "notie.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp",
+    "build": "gulp build:all"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/egoist/notie.git"
+    "url": "git+https://github.com/egoist/corner-notie.git"
   },
   "keywords": [
     "tip"
@@ -16,9 +18,9 @@
   "author": "EGOIST",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/egoist/notie/issues"
+    "url": "https://github.com/egoist/corner-notie/issues"
   },
-  "homepage": "https://github.com/egoist/notie#readme",
+  "homepage": "https://github.com/egoist/corner-notie#readme",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-loader": "^6.0.1",
