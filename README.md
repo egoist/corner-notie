@@ -7,7 +7,7 @@ A corner tip utility.
 
 ## Install
 
-Hot-link the `./browser/notie.js` in your web page directly, CSS is automatically included.
+Hot-link the [UMD version](https://npmcdn.com/corner-notie/browser/notie.js) in your web page directly, CSS is automatically included.
 
 or via NPM:
 
