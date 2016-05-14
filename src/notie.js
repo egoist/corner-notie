@@ -36,6 +36,7 @@ class Notie {
   notify() {
     this.init()
     this.notie = document.createElement('div')
+    this.notie.style.width = `${this.opts.width}px`
     this.notie.className = `notie notie-${this.opts.type}${this.opts.autoHide ? '' : ' notie-auto-hide-disabled'}`
     this.notie.innerHTML = `
     <div class="notie-body">
@@ -96,13 +97,15 @@ const notie = (text = '', {
   position = 'top-right',
   type = 'info',
   autoHide = true,
-  timeout = 3000
+  timeout = 3000,
+  width = 240
 } = {}) => {
   return new Notie(text, {
     type,
     position,
     autoHide,
-    timeout
+    timeout,
+    width
   })
 }
 

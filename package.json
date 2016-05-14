@@ -8,7 +8,8 @@
     "test": "echo lol",
     "dev": "gulp",
     "build": "gulp webpack && gulp browser",
-    "demo": "npm run build && cp index.html demo/ && cp browser/notie.js demo/ && gh-pages -d demo"
+    "copy": "cp index.html demo/ && cp browser/notie.js demo/",
+    "demo": "npm run build && npm run copy && gh-pages -d demo"
   },
   "repository": {
     "type": "git",

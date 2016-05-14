@@ -3,13 +3,17 @@ import serve from 'gulp-serve'
 import webpack from 'webpack'
 import gutil from 'gulp-util'
 import path from 'path'
+import {execSync} from 'child_process'
 import webpackConfig from './webpack.config'
 
 gulp.task('serve', serve({
   port: 3746,
-  root: '.'
+  root: './demo'
 }))
 
+gulp.task('copy', () => {
+  execSync('npm run copy')
+})
 
 gulp.task('webpack', (cb) => {
   let config = Object.create(webpackConfig)
@@ -47,6 +51,7 @@ gulp.task('browser', (cb) => {
 
 gulp.task('watch', () => {
   gulp.watch('./src/*', ['browser'])
+  gulp.watch('./browser/*', ['copy'])
 })
 
 gulp.task('build', ['browser'])

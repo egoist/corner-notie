@@ -9,6 +9,7 @@
 
 .noties {
   position: fixed;
+  max-width: 80%;
   &:empty {
     display: none;
   }
@@ -87,8 +88,6 @@
   opacity: 0;
   transition: transform .3s, opacity .3s;
   border: 1px solid #ddd;
-  width: 200px;
-  max-width: 80%;
   font: 14px/1.4 Helvetica, serif;
   word-wrap: break-word;
   &:not(:last-child) {

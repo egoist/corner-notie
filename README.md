@@ -28,7 +28,8 @@ notie('', {
   type: 'info', // info | warning | success | danger
   autoHide: true,
   timeout: 3000,
-  position: 'top-right'
+  position: 'top-right',
+  width: 240
 })
 ```
 
