@@ -1,6 +1,6 @@
 {
   "name": "corner-notie",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A corner tip utility",
   "main": "notie.js",
   "jsnext:main": "./src/notie.js",
