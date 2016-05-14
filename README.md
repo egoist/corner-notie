@@ -1,4 +1,4 @@
-# notie
+# corner-notie
 
 [![NPM version](https://img.shields.io/npm/v/corner-notie.svg?style=flat-square)](https://www.npmjs.com/package/corner-notie)
 [![NPM download](https://img.shields.io/npm/dm/corner-notie.svg?style=flat-square)](https://www.npmjs.com/package/corner-notie)
