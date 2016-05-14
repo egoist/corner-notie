@@ -3,6 +3,7 @@ logs
 *.log
 /notie.js
 /browser
+/demo
 
 # Runtime data
 pids
