@@ -10,84 +10,100 @@ const svgs = {
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
+function domEach(els, fn) {
+  Array.prototype.forEach.call(els, fn)
+}
+
 class Notie {
-  constructor (opts = {}) {
+  constructor(text, opts) {
+    this.text = text
     this.opts = opts
-    if (typeof opts[0] === 'object') {
-      this.opts = opts[0]
-      this.opts.type = this.opts.type ? this.opts.type : 'info'
-      if (!this.opts.text) {
-        return console.error('No text provided...')
-      }
-      this.opts.autoHide = (typeof this.opts.autoHide === 'undefined') ? true : this.opts.autoHide
-    } else {
-      if (!opts || opts.length === 0) {
-        return console.error('lack of arguments...')
-      } else if (opts.length === 1) {
-        this.opts.type = 'info'
-        this.opts.text = opts[0]
-        this.opts.autoHide = true
-      } else {
-        this.opts.type = opts[0]
-        this.opts.text = opts[1]
-        this.opts.autoHide = (typeof opts[2] === 'undefined') ? true : opts[2]
-      }
-    }
+    this.events = {}
     this.notify()
   }
-  init () {
-    const noties = document.createElement('div')
-    noties.className = 'noties'
-    $('body').appendChild(noties)
-  }
-  notify () {
-    if (!$('.noties')) {
-      this.init()
+
+  init() {
+    const noties = $(`.noties-${this.opts.position}`)
+    if (!noties) {
+      this.noties = document.createElement('div')
+      this.noties.className = `noties noties-${this.opts.position}`
+      $('body').appendChild(this.noties)
+    } else {
+      this.noties = noties
     }
-    const notie = document.createElement('div')
-    notie.className = `notie notie-${this.opts.type}${this.opts.autoHide ? '' : ' notie-auto-hide-disabled'}`
-    notie.innerHTML = `
+  }
+
+  notify() {
+    this.init()
+    this.notie = document.createElement('div')
+    this.notie.className = `notie notie-${this.opts.type}${this.opts.autoHide ? '' : ' notie-auto-hide-disabled'}`
+    this.notie.innerHTML = `
     <div class="notie-body">
       <span class="notie-svg">${svgs[this.opts.type]}</span>
-      <span class="notie-text">${this.opts.text}</span>
+      <span class="notie-text">${this.text}</span>
     </div>
     `
-    // append notie
-    $('.noties').appendChild(notie)
+    // add new notie
+    const firstChild = this.noties.firstChild
+    this.noties.insertBefore(this.notie, firstChild)
+
     // show notie
     setTimeout(() => {
-      notie.classList.add('notie-shown')
+      this.notie.classList.add('notie-shown')
     }, 100)
-    // store notie for tracking
-    this.notie = notie
-    // autoHide notie
+
+    // auto hide
     if (this.opts.autoHide) {
-      setTimeout(() => {
-        this.removeNotie()
-      }, 3000)
+      this.startTimeout()
+    }
+
+    this.registerEvents()
+  }
+
+  registerEvents() {
+    if (this.opts.autoHide) {
+      this.events.mouseover = () => {
+        clearTimeout(this.timeout)
+        this.timeout = null
+      }
+      this.events.mouseleave = () => this.startTimeout()
+      this.notie.addEventListener('mouseover', this.events.mouseover, false)
+      this.notie.addEventListener('mouseleave', this.events.mouseleave, false)
     } else {
-      notie.addEventListener('click', () => {
-        this.removeNotie(notie)
-      })
-      notie.querySelector('a').addEventListener('click', (e) => {
-        e.stopPropagation()
+      this.notie.addEventListener('click', () => this.removeNotie())
+      domEach(this.notie.querySelectorAll('[notie-prevent]'), el => {
+        el.addEventListener('click', e => e.stopPropagation(), false)
       })
     }
   }
-  removeNotie (notie = this.notie) {
+
+  startTimeout(timeout = this.opts.timeout) {
+    this.timeout = setTimeout(() => {
+      this.removeNotie()
+    }, timeout)
+  }
+
+  removeNotie(notie = this.notie) {
     notie.classList.remove('notie-shown')
     setTimeout(() => {
-      notie.remove()
+      this.noties.removeChild(notie)
+      notie = null
     }, 200)
   }
 }
 
-const notie = (...opts) => {
-  return new Notie(opts)
+const notie = (text = '', {
+  position = 'top-right',
+  type = 'info',
+  autoHide = true,
+  timeout = 3000
+} = {}) => {
+  return new Notie(text, {
+    type,
+    position,
+    autoHide,
+    timeout
+  })
 }
 
-if (typeof module !== 'undefined') {
-  module.exports = notie
-} else if (typeof window !== 'undefined') {
-  window.notie = notie
-}
+export default notie

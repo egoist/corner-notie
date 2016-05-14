@@ -24,8 +24,9 @@ module.exports = {
   postcss () {
     return [
       require('postcss-mixins'),
-      require('postcss-nested'),
-      require('cssnext')()
+      require('postcss-cssnext')({
+        browsers: ['ie > 8', 'last 2 versions']
+      })
     ]
   },
   plugins: [
@@ -33,11 +34,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
       }
     })
   ]

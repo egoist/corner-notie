@@ -30,6 +30,11 @@ gulp.task('webpack', (cb) => {
 
 gulp.task('browser', (cb) => {
   let config = Object.create(webpackConfig)
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compressor: {
+      warnings: false
+    }
+  }))
   let compiler = webpack(config)
   compiler.run((err, stats) => {
     if(err) throw new gutil.PluginError("webpack", err)
@@ -41,11 +46,9 @@ gulp.task('browser', (cb) => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch('./src/notie.js', ['browser'])
+  gulp.watch('./src/*', ['browser'])
 })
 
 gulp.task('build', ['browser'])
-
-gulp.task('build:all', ['browser', 'webpack'])
 
 gulp.task('default', ['build', 'serve', 'watch'])
