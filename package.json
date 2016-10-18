@@ -8,7 +8,7 @@
     "test": "echo lol",
     "dev": "gulp",
     "build": "gulp webpack && gulp browser",
-    "copy": "cp index.html demo/ && cp browser/notie.js demo/",
+    "copy": "mkdir -p demo && cp index.html demo/ && cp browser/notie.js demo/",
     "demo": "npm run build && npm run copy && gh-pages -d demo"
   },
   "repository": {

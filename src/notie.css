@@ -10,6 +10,7 @@
 .noties {
   position: fixed;
   max-width: 80%;
+  z-index: 9999;
   &:empty {
     display: none;
   }

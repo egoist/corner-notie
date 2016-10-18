@@ -54,6 +54,6 @@ gulp.task('watch', () => {
   gulp.watch('./browser/*', ['copy'])
 })
 
-gulp.task('build', ['browser'])
+gulp.task('build', ['browser', 'copy'])
 
 gulp.task('default', ['build', 'serve', 'watch'])
