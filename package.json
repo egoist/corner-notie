@@ -6,9 +6,9 @@
   "jsnext:main": "./src/notie.js",
   "scripts": {
     "test": "echo lol",
-    "dev": "gulp",
-    "build": "gulp webpack && gulp browser",
-    "copy": "mkdir -p demo && cp index.html demo/ && cp browser/notie.js demo/",
+    "dev": "webpack",
+    "build": "webpack -p",
+    "copy": "mkdir -p demo && cp index.html demo/ && cp ./browser/notie.js demo/",
     "demo": "npm run build && npm run copy && gh-pages -d demo"
   },
   "repository": {
@@ -19,9 +19,9 @@
     "tip"
   ],
   "files": [
-    "browser",
     "src",
-    "notie.js"
+    "notie.js",
+    "browser"
   ],
   "author": "EGOIST",
   "license": "MIT",
@@ -30,20 +30,18 @@
   },
   "homepage": "https://github.com/egoist/corner-notie#readme",
   "devDependencies": {
-    "babel-core": "^6.0.20",
-    "babel-loader": "^6.0.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.0.15",
-    "css-loader": "^0.21.0",
-    "gulp": "^3.9.0",
-    "gulp-serve": "^1.2.0",
-    "gulp-util": "^3.0.7",
-    "postcss-cssnext": "^2.5.2",
-    "postcss-loader": "^0.7.0",
-    "postcss-mixins": "^2.1.1",
-    "postcss-nested": "^1.0.0",
-    "style-loader": "^0.13.0",
-    "svg-inline-loader": "^0.3.0",
-    "webpack": "^1.12.2"
+    "css-loader": "^0.28.7",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.9",
+    "postcss-mixins": "^6.2.0",
+    "style-loader": "^0.19.0",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^3.10.0"
   }
 }

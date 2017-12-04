@@ -1,9 +1,12 @@
-@define-mixin colorful $bgColor, $borderColor, $color {
-  background-color: $bgColor;
-  border-color: $borderColor;
-  color: $color;
-  a {
+@define-mixin colorful $state, $bgColor, $borderColor, $color {
+  .notie-$(state) {
+    background-color: $bgColor;
+    border-color: $borderColor;
     color: $color;
+
+    & a {
+      color: $color;
+    }
   }
 }
 
@@ -117,16 +120,9 @@
     height: 23px;
     width: 23px;
   }
-  &.notie-info {
-    @mixin colorful #C6E4F4, #A9D3EB, #477DAC;
-  }
-  &.notie-error {
-    @mixin colorful #EAC1BD, #D7A9A6, #AB2925;
-  }
-  &.notie-success {
-    @mixin colorful #D9F1CF, #C8E1BF, #748C6C;
-  }
-  &.notie-warning {
-    @mixin colorful #F7F2CF, #E8E2B2, #9C7D45;
-  }
 }
+
+@mixin colorful info, #C6E4F4, #A9D3EB, #477DAC;
+@mixin colorful error, #EAC1BD, #D7A9A6, #AB2925;
+@mixin colorful success, #D9F1CF, #C8E1BF, #748C6C;
+@mixin colorful warning, #F7F2CF, #E8E2B2, #9C7D45;

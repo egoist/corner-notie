@@ -1,40 +1,40 @@
-var webpack = require('webpack')
-var path = require('path')
+const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
   entry: ['./src/notie.js'],
   output: {
     path: path.join(__dirname, 'browser'),
     filename: 'notie.js',
-    libraryTarget: 'var',
-    library: 'notie'
+    libraryTarget: 'umd',
+    library: 'notie',
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel' },
       {
-        test: /\.css$/, loader: 'style!css!postcss'
+        test: /\.js$/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'postcss-loader'],
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline'
-      }
+        loader: 'svg-inline-loader',
+      },
     ],
   },
-  postcss () {
-    return [
-      require('postcss-mixins'),
-      require('postcss-cssnext')({
-        browsers: ['ie > 8', 'last 2 versions']
-      })
-    ]
-  },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    /*
+     * See the note in the README about Webpack
+     * It does not support OccurenceOrderPlugin (Webpack has now its own validation built-in)
+     * new webpack.optimize.OccurenceOrderPlugin(),
+    */
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ]
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+  ],
 }

@@ -35,6 +35,8 @@ node_modules
 # Icon must end with two \r
 Icon
 
+# Yarn
+yarn.lock
 
 # Thumbnails
 ._*
