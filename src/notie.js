@@ -1,20 +1,24 @@
-import Styles from './notie.css'
+import './notie.css'
 import error from './svg/icon-error.svg'
 import success from './svg/icon-success.svg'
 import warning from './svg/icon-warning.svg'
 import info from './svg/icon-info.svg'
+
 const svgs = {
-  info, success, warning, error
+  info,
+  success,
+  warning,
+  error,
 }
 
 const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
 
-function domEach(els, fn) {
+const domEach = (els, fn) => {
   Array.prototype.forEach.call(els, fn)
 }
 
 class Notie {
+
   constructor(text, opts) {
     this.text = text
     this.opts = opts
@@ -72,8 +76,10 @@ class Notie {
       this.notie.addEventListener('mouseleave', this.events.mouseleave, false)
     } else {
       this.notie.addEventListener('click', () => this.removeNotie())
-      domEach(this.notie.querySelectorAll('[notie-prevent]'), el => {
-        el.addEventListener('click', e => e.stopPropagation(), false)
+      domEach(this.notie.querySelectorAll('[notie-prevent]'), (el) => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation()
+        }, false)
       })
     }
   }
@@ -105,7 +111,7 @@ const notie = (text = '', {
     position,
     autoHide,
     timeout,
-    width
+    width,
   })
 }
 
